@@ -73,3 +73,16 @@ exports.handleExtends = () => {
     return {};
   }
 };
+
+/**
+ * Handle Directory Option
+ */
+exports.handleDirectory = () => {
+  const directory = core.getInput(inputs.directory);
+
+  if (directory) {
+    return { cwd: directory };
+  } else {
+    return {};
+  }
+};

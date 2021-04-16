@@ -3,6 +3,7 @@ const {
   handleBranchesOption,
   handleDryRunOption,
   handleExtends,
+  handleDirectory,
 } = require('./handleOptions');
 const setUpJob = require('./setUpJob.task');
 const installSpecifyingVersionSemantic = require('./installSpecifyingVersionSemantic.task');
@@ -22,10 +23,14 @@ const release = async () => {
   await preInstall(core.getInput(inputs.extends));
 
   const semanticRelease = require('semantic-release');
+  console.log("Directory option", handleDirectory())
+  core.error("[CORE] Directory option", handleDirectory());
   const result = await semanticRelease({
     ...handleBranchesOption(),
     ...handleDryRunOption(),
     ...handleExtends(),
+  }, {
+    ...handleDirectory()
   });
 
   await cleanupNpmrc();
